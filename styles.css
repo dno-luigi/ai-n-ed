@@ -1,0 +1,144 @@
+body {
+  font-family: 'Noto Serif JP', serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #121212;
+  color: #e0e0e0;
+  text-transform: lowercase;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.page-container {
+  text-align: left; /* Left-align all content within page-container */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.page-container h1 {
+  text-align: center; /* Keep headers centered */
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: 2em;
+  font-family: 'Noto Serif JP', serif;
+}
+
+p {
+  margin: 10px 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: #e0e0e0;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  background-color: #1e1e1e;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.footer-links {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.footer-links a {
+  margin: 0 10px;
+}
+
+.home-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 8px 16px;
+  border: 1px solid #424242;
+  border-radius: 4px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.search-bar {
+  width: 98%;
+  max-width: 98%;
+  padding: 50px 15px;
+  font-size: 0.9em;
+  background-color: #212121;
+  border: 1px solid #424242;
+  color: #e0e0e0;
+  border-radius: 5px;
+  text-align: center;
+  white-space: pre-line;
+}
+
+.search-container h1 {
+  font-size: 3.2em;
+  margin-bottom: 25px;
+  width: 100%;
+  text-align: center;
+}
+
+.formatted-answer {
+  margin-top: 20px;
+  text-align: left;
+  font-size: 1.1em;
+}
+
+.formatted-answer h2 {
+  margin-bottom: 10px;
+  font-size: 1.4em;
+}
+
+.formatted-sources {
+  margin-top: 20px;
+  padding-left: 0;
+  font-size: 1.1em;
+}
+
+.formatted-sources li {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #1e1e1e;
+  border-radius: 5px;
+}
+
+.formatted-sources a {
+  color: #e0e0e0;
+  text-decoration: none;
+}
+
+.formatted-sources a:hover {
+  text-decoration: underline;
+}
+
+.loading-indicator {
+  display: none;
+  margin-top: 20px;
+  font-style: italic;
+  font-size: 1.1em;
+}

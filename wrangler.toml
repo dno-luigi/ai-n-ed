@@ -1,0 +1,13 @@
+name = "landing"
+
+# The following fields are optional but recommended
+compatibility_date = "2023-01-01"
+
+# Specify the directory where your build outputs your static files
+pages_build_output_dir = "build/client"
+
+[env.production]
+name = "landing-production"
+
+[env.preview]
+name = "landing-preview"

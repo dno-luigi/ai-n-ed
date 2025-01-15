@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ai-nspired</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main>
+    <div class="search-container">
+      <h1>ai-nspired</h1>
+      <form id="search-form" class="search-form">
+        <input type="text" id="search-bar" placeholder="applied justice, &#10;as above so below" class="search-bar">
+      </form>
+      <div id="results" class="results"></div>
+      <div id="loading" class="loading-indicator">thinking...</div>
+    </div>
+  </main>
+  <footer>
+    <div class="footer-links">
+      <a href="about.html">about</a>
+      <a href="contact.html">contact</a>
+      <a href="terms.html">terms</a>
+      <a href="privacy.html">privacy</a>
+    </div>
+    <p>© 2025 all rights reserved</p>
+  </footer>
+  <script>
+    // Basic Markdown Parser
+    function markdownToHTML(markdown) {
+      let html = markdown;
+      // Bold
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      // Italics
+      html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      // Links
+      html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>');
+      // Line breaks
+      html = html.replace(/\n/g, '<br>');
+      return html;
+    }
+
+    function sanitizeHTML(html) {
+      const tempDiv = document.createElement('div');
+      tempDiv.textContent = html;
+      return tempDiv.innerHTML;
+    }
+
+    document.getElementById('search-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const query = document.getElementById('search-bar').value;
+      const loadingDiv = document.getElementById('loading');
+      const resultsDiv = document.getElementById('results');
+
+      resultsDiv.innerHTML = '';
+      loadingDiv.style.display = 'block';
+
+      fetch('https://landie.dnoluigi.workers.dev/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      })
+      .then(response => response.json())
+      .then(data => {
+        loadingDiv.style.display = 'none';
+        let sourcesHTML = '';
+        if (data.sources && data.sources.length > 0) {
+          sourcesHTML = `
+            <h2>top 5</h2>
+            <ul class="formatted-sources">
+              ${data.sources.slice(0, 5).map((source, i) => `
+                <li>
+                  <a href="${source.link}" target="_blank">
+                    <strong>${sanitizeHTML(source.title)}</strong>
+                  </a>
+                  <p>${sanitizeHTML(source.snippet)}</p>
+                </li>
+              `).join('')}
+            </ul>
+          `;
+        }
+        resultsDiv.innerHTML = `
+          <div class="formatted-answer">
+            <h2>answer</h2>
+            <p>${markdownToHTML(sanitizeHTML(data.answer))}</p>
+          </div>
+          ${sourcesHTML}
+        `;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        loadingDiv.style.display = 'none';
+        resultsDiv.innerHTML = '<p>an error occurred while fetching results.</p>';
+      });
+    });
+  </script>
+</body>
+</html>
