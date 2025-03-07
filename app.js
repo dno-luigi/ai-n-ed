@@ -1,26 +1,3 @@
-dno
-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
-
-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
-
-curl https://openrouter.ai/api/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer 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" \
-  -d '{
-  "model": "liquid/lfm-7b",
-  "messages": [
-    {"role": "user", "content": "What is the meaning of life?"}
-  ],
-  "top_p": 1,
-  "temperature": 0.5,
-  "frequency_penalty": 0,
-  "presence_penalty": 0,
-  "repetition_penalty": 1,
-  "top_k": 0
-}'
-
-
-
 document.getElementById('search-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const query = document.getElementById('search-query').value;
